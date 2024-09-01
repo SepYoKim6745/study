@@ -1,31 +1,32 @@
 #include <bits/stdc++.h>
 using namespace std;
-int n, j = 1;
-stack<int> stk;
-int arr[100004];
 string ret;
 int main(){
 
+    int n, num, i = 1;
     cin >> n;
-    
-    for(int i = 1; i < n; i++){
-        cin >> arr[i];
-    }
+    stack<int> stk;
 
-    int i;
-
-    for(i = 1; i <= n; i++){
-        while(j < i){
+    while(n) {
+        cin >> num;
+        
+        while(i <= num) {
             stk.push(i);
             ret += "+\n";
+            i++;
         }
-        if(stk.top() == arr[j]) {
-            stk.pop();
-            ret += "-\n";
-            j++;
+        if(stk.top() == num){
+            while(!stk.empty() && stk.top() == num) {
+                stk.pop();
+                ret += "-\n";
+            }
+        } else {
+            ret = "NO";
+            break;
         }
+        n--;
     }
-
+    
     cout << ret;
 
     return 0;
